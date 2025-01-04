@@ -11,6 +11,8 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text for contrast */
         }
         canvas {
             max-width: 600px;
@@ -40,10 +42,10 @@
     </div>
 
     <script>
-        // Replace with your ThingSpeak API Keys and Channel ID
-        const apiKey = "Z9I8A8CEOFKGXNNN"; // Replace with your ThingSpeak Read API Key
-        const channelId = "2800872"; // Replace with your Channel ID
-        const writeAPIKey = "IG4STQXCWCJ3L813"; // Replace with your Write API Key for toggle switch
+        // API Keys and Channel ID
+        const apiKey = "Z9I8A8CEOFKGXNNN"; // ThingSpeak Read API Key
+        const channelId = "2800872"; // Channel ID
+        const writeAPIKey = "IG4STQXCWCJ3L813"; // Write API Key for toggle switch
         const updateInterval = 5000; // Update every 5 seconds
 
         // Create chart containers
