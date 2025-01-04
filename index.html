@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThingSpeak Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        canvas {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .switch-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ThingSpeak Data Dashboard</h1>
+    <div>
+        <canvas id="voltageChart"></canvas>
+        <canvas id="currentChart"></canvas>
+        <canvas id="powerChart"></canvas>
+        <canvas id="frequencyChart"></canvas>
+        <canvas id="powerFactorChart"></canvas>
+        <canvas id="energyChart"></canvas>
+    </div>
+    <div class="switch-container">
+        <label for="toggleSwitch">Toggle Switch:</label>
+        <input type="checkbox" id="toggleSwitch">
+    </div>
+
+    <script>
+        const apiKey = "Z9I8A8CEOFKGXNNN";
+        const channelId = "2800872";
+        const updateInterval = 5000; // Update every 5 seconds
+        const writeAPIKey = "IG4STQXCWCJ3L813"; // For toggle switch
+
+        const charts = {};
+
+        function createChart(chartId, label) {
+            const ctx = document.getElementById(chartId).getContext("2d");
+            return new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: label,
+                        data: [],
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: "time",
+                            time: {
+                                unit: "minute"
+                            }
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart(chart, label, value) {
+            if (chart.data.labels.length > 20) { // Keep the last 20 data points
+                chart.data.labels.shift();
+                chart.data.datasets[0].data.shift();
+            }
+            chart.data.labels.push(label);
+            chart.data.datasets[0].data.push(value);
+            chart.update();
+        }
+
+        function fetchData() {
+            fetch(`https://api.thingspeak.com/channels/${channelId}/feeds.json?api_key=${apiKey}&results=1`)
+                .then(response => response.json())
+                .then(data => {
+                    const feed = data.feeds[0];
+                    const time = new Date(feed.created_at);
+
+                    updateChart(charts.voltage, time, parseFloat(feed.field1 || 0));
+                    updateChart(charts.current, time, parseFloat(feed.field2 || 0));
+                    updateChart(charts.power, time, parseFloat(feed.field3 || 0));
+                    updateChart(charts.frequency, time, parseFloat(feed.field4 || 0));
+                    updateChart(charts.powerFactor, time, parseFloat(feed.field5 || 0));
+                    updateChart(charts.energy, time, parseFloat(feed.field6 || 0));
+                });
+        }
+
+        function toggleSwitchHandler(event) {
+            const value = event.target.checked ? 1 : 0;
+            fetch(`https://api.thingspeak.com/update?api_key=${writeAPIKey}&field7=${value}`)
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Toggle switch value updated successfully!");
+                    } else {
+                        console.error("Failed to update toggle switch value.");
+                    }
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            charts.voltage = createChart("voltageChart", "Voltage (V)");
+            charts.current = createChart("currentChart", "Current (A)");
+            charts.power = createChart("powerChart", "Power (W)");
+            charts.frequency = createChart("frequencyChart", "Frequency (Hz)");
+            charts.powerFactor = createChart("powerFactorChart", "Power Factor");
+            charts.energy = createChart("energyChart", "Energy (kWh)");
+
+            document.getElementById("toggleSwitch").addEventListener("change", toggleSwitchHandler);
+
+            setInterval(fetchData, updateInterval);
+            fetchData();
+        });
+    </script>
+</body>
+</html>
