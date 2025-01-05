@@ -1,33 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Plug</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Plug Monitoring</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      max-width: 600px;
+      margin: 20px auto;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SMART PLUG</h1>
-        <div class="controls">
-            <label for="led-toggle">LED Control:</label>
-            <label class="switch">
-                <input type="checkbox" id="led-toggle">
-                <span class="slider"></span>
-                <span id="led-status">OFF</span>
-            </label>
-        </div>
-        <div id="charts">
-            <h2>Voltage, Current, Power, Frequency, Power Factor, Energy</h2>
-            <canvas id="voltage-chart" class="chart"></canvas>
-            <canvas id="current-chart" class="chart"></canvas>
-            <canvas id="power-chart" class="chart"></canvas>
-            <canvas id="frequency-chart" class="chart"></canvas>
-            <canvas id="power-factor-chart" class="chart"></canvas>
-            <canvas id="energy-chart" class="chart"></canvas>
-        </div>
-    </div>
-    <script src="script.js"></script>
+  <h1>Smart Plug Monitoring Dashboard</h1>
+
+  <h3>Frequency (Hz)</h3>
+  <canvas id="frequencyChart"></canvas>
+
+  <h3>Power Factor</h3>
+  <canvas id="powerFactorChart"></canvas>
+
+  <h3>Energy Consumption (kWh)</h3>
+  <canvas id="energyChart"></canvas>
+
+  <script>
+    // Sample Data Arrays
+    const frequencyData = [50.0, 50.1, 49.9, 50.2, 50.0];
+    const powerFactorData = [0.98, 0.99, 0.97, 1.0, 0.98];
+    const energyData = [0.1, 0.2, 0.3, 0.4, 0.5];
+
+    const labels = ['1s', '2s', '3s', '4s', '5s'];
+
+    // Frequency Chart
+    const frequencyCtx = document.getElementById('frequencyChart').getContext('2d');
+    new Chart(frequencyCtx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Frequency (Hz)',
+          data: frequencyData,
+          borderColor: 'blue',
+          fill: false
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    // Power Factor Chart
+    const powerFactorCtx = document.getElementById('powerFactorChart').getContext('2d');
+    new Chart(powerFactorCtx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Power Factor',
+          data: powerFactorData,
+          borderColor: 'green',
+          fill: false
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    // Energy Consumption Chart
+    const energyCtx = document.getElementById('energyChart').getContext('2d');
+    new Chart(energyCtx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Energy (kWh)',
+          data: energyData,
+          borderColor: 'red',
+          fill: false
+        }]
+      },
+      options: { responsive: true }
+    });
+  </script>
 </body>
 </html>
