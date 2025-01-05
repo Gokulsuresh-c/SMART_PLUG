@@ -1,59 +1,121 @@
+const apiKey = 'Z9I8A8CEOFKGXNNN';  // Replace with your ThingSpeak read API key
+const channelId = '2800872'; // Replace with your ThingSpeak channel ID
+const writeApiKey = 'IG4STQXCWCJ3L813'; // Replace with your ThingSpeak write API key
+const updateInterval = 15000;
+
+function sendToThingSpeak(value) {
+    const url = https://api.thingspeak.com/update?api_key=${writeApiKey}&field7=${value};
+    fetch(url).catch(error => console.error('Error sending data:', error));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const ledToggle = document.getElementById('led-toggle');
     const ledStatus = document.getElementById('led-status');
-    const scheduleTime = document.getElementById('schedule-time');
-    const scheduleBtn = document.getElementById('schedule-btn');
 
     ledToggle.addEventListener('change', () => {
-        if (ledToggle.checked) {
-            ledStatus.textContent = 'ON';
-            ledStatus.style.backgroundColor = 'green';
-        } else {
-            ledStatus.textContent = 'OFF';
-            ledStatus.style.backgroundColor = 'white';
-        }
-        // Send toggle status to ThingSpeak
+        const state = ledToggle.checked ? 1 : 0;
+        ledStatus.textContent = state ? 'ON' : 'OFF';
+        sendToThingSpeak(state);
     });
 
-    scheduleBtn.addEventListener('click', () => {
-        const time = scheduleTime.value;
-        if (time) {
-            alert(LED will be scheduled to turn on at ${time});
-            // Send scheduled time to ThingSpeak
-        }
-    });
+    function fetchDataAndUpdateChart(chart, field) {
+        fetch(https://api.thingspeak.com/channels/${channelId}/fields/${field}.json?api_key=${apiKey}&results=10)
+            .then(response => response.json())
+            .then(data => {
+                const feed = data.feeds;
+                const labels = feed.map(entry => new Date(entry.created_at).toLocaleTimeString());
+                const values = feed.map(entry => parseFloat(entry[field${field}]) || 0);
+                chart.data.labels = labels;
+                chart.data.datasets[0].data = values;
+                chart.update();
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
 
-    // Chart.js setup (replace data fetching and updating with ThingSpeak API requests)
-    const charts = [
-        { id: 'voltage-chart', label: 'Voltage (V)' },
-        { id: 'current-chart', label: 'Current (A)' },
-        { id: 'power-chart', label: 'Power (W)' },
-        { id: 'frequency-chart', label: 'Frequency (Hz)' },
-        { id: 'power-factor-chart', label: 'Power Factor' },
-        { id: 'energy-chart', label: 'Energy (kWh)' }
-    ];
-
-    charts.forEach(chart => {
-        const ctx = document.getElementById(chart.id).getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [], // Time data
-                datasets: [{
-                    label: chart.label,
-                    data: [], // Sensor data
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
+    const voltageChart = new Chart(document.getElementById('voltage-chart').getContext('2d'), {
+        type: 'line',
+        data: { labels: [], datasets: [{ label: 'Voltage (V)', data: [], borderColor: 'blue', borderWidth: 2 }] },
+        options: { 
+            responsive: true, 
+            scales: { 
+                x: { title: { display: true, text: 'Time' }, grid: { display: true } },
+                y: { title: { display: true, text: 'Voltage (V)' }, grid: { display: true } }
             },
-            options: {
-                responsive: true,
-                scales: {
-                    x: { title: { display: true, text: 'Time' } },
-                    y: { title: { display: true, text: chart.label } }
-                }
-            }
-        });
+            plugins: { title: { display: true, text: 'Voltage' } }
+        }
     });
+
+    const currentChart = new Chart(document.getElementById('current-chart').getContext('2d'), {
+        type: 'line',
+        data: { labels: [], datasets: [{ label: 'Current (A)', data: [], borderColor: 'green', borderWidth: 2 }] },
+        options: { 
+            responsive: true, 
+            scales: { 
+                x: { title: { display: true, text: 'Time' }, grid: { display: true } },
+                y: { title: { display: true, text: 'Current (A)' }, grid: { display: true } }
+            },
+            plugins: { title: { display: true, text: 'Current' } }
+        }
+    });
+
+    const powerChart = new Chart(document.getElementById('power-chart').getContext('2d'), {
+        type: 'line',
+        data: { labels: [], datasets: [{ label: 'Power (W)', data: [], borderColor: 'red', borderWidth: 2 }] },
+        options: { 
+            responsive: true, 
+            scales: { 
+                x: { title: { display: true, text: 'Time' }, grid: { display: true } },
+                y: { title: { display: true, text: 'Power (W)' }, grid: { display: true } }
+            },
+            plugins: { title: { display: true, text: 'Power' } }
+        }
+    });
+
+    const frequencyChart = new Chart(document.getElementById('frequency-chart').getContext('2d'), {
+        type: 'line',
+        data: { labels: [], datasets: [{ label: 'Frequency (Hz)', data: [], borderColor: 'orange', borderWidth: 2 }] },
+        options: { 
+            responsive: true, 
+            scales: { 
+                x: { title: { display: true, text: 'Time' }, grid: { display: true } },
+                y: { title: { display: true, text: 'Frequency (Hz)' }, grid: { display: true } }
+            },
+            plugins: { title: { display: true, text: 'Frequency' } }
+        }
+    });
+
+    const powerFactorChart = new Chart(document.getElementById('power-factor-chart').getContext('2d'), {
+        type: 'line',
+        data: { labels: [], datasets: [{ label: 'Power Factor', data: [], borderColor: 'purple', borderWidth: 2 }] },
+        options: { 
+            responsive: true, 
+            scales: { 
+                x: { title: { display: true, text: 'Time' }, grid: { display: true } },
+                y: { title: { display: true, text: 'Power Factor' }, grid: { display: true } }
+            },
+            plugins: { title: { display: true, text: 'Power Factor' } }
+        }
+    });
+
+    const energyChart = new Chart(document.getElementById('energy-chart').getContext('2d'), {
+        type: 'line',
+        data: { labels: [], datasets: [{ label: 'Energy (kWh)', data: [], borderColor: 'teal', borderWidth: 2 }] },
+        options: { 
+            responsive: true, 
+            scales: { 
+                x: { title: { display: true, text: 'Time' }, grid: { display: true } },
+                y: { title: { display: true, text: 'Energy (kWh)' }, grid: { display: true } }
+            },
+            plugins: { title: { display: true, text: 'Energy' } }
+        }
+    });
+
+    setInterval(() => {
+        fetchDataAndUpdateChart(voltageChart, 1);
+        fetchDataAndUpdateChart(currentChart, 2);
+        fetchDataAndUpdateChart(powerChart, 3);
+        fetchDataAndUpdateChart(frequencyChart, 4);
+        fetchDataAndUpdateChart(powerFactorChart, 5);
+        fetchDataAndUpdateChart(energyChart, 6);
+    }, updateInterval);
 });
