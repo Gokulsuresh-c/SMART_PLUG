@@ -1,6 +1,6 @@
-const apiKey = 'AGD6ZD4MM8Q7TTJV'; // Replace with your ThingSpeak Read API Key
-const writeKey = 'L2TDJ1Y4WC0HTNAQ'; // Replace with your ThingSpeak Write API Key
-const channelId = '2716153'; // Replace with your ThingSpeak Channel ID
+const apiKey = 'Z9I8A8CEOFKGXNNN'; // Replace with your ThingSpeak Read API Key
+const writeKey = 'IG4STQXCWCJ3L813'; // Replace with your ThingSpeak Write API Key
+const channelId = '2800872'; // Replace with your ThingSpeak Channel ID
 
 // Initialize chart elements
 const voltageChart = new Chart(document.getElementById("voltageChart"), {
