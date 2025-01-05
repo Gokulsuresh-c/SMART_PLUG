@@ -8,7 +8,7 @@ const voltageChart = new Chart(document.getElementById("voltageChart"), {
     data: {
         labels: [], // Will be filled with time labels
         datasets: [{
-            label: 'Voltage', // Changed label to "Current (A)"
+            label: 'Voltage', // Changed label to "Voltage(v)"
             borderColor: '#00ff00',
             backgroundColor: 'rgba(0, 255, 0, 0.2)',
             data: []
@@ -24,10 +24,10 @@ const voltageChart = new Chart(document.getElementById("voltageChart"), {
             },
             y: {
                 min: 0,
-                max: 5, // Set y-axis range from 0 to 5
+                max: 250, // Set y-axis range from 0 to 250
                 title: {
                     display: true,
-                    text: 'Voltage (A)' // Label the y-axis as "CURRENT"
+                    text: 'Voltage (V)' // Label the y-axis as "VOLTAGE"
                 }
             }
         }
@@ -54,7 +54,7 @@ const currentChart = new Chart(document.getElementById("currentChart"), {
             },
             y: {
                 min: 0,
-                max: 5, // Set y-axis range from 0 to 5
+                max: 100, // Set y-axis range from 0 to 100
                 title: {
                     display: true,
                     text: 'CURRENT (A)' // Label the y-axis as "CURRENT"
@@ -63,7 +63,36 @@ const currentChart = new Chart(document.getElementById("currentChart"), {
         }
     }
 });
-
+const powerChart = new Chart(document.getElementById("powerChart"), {
+    type: 'line',
+    data: {
+        labels: [], // Will be filled with time labels
+        datasets: [{
+            label: 'Power', // Changed label to "Current (A)"
+            borderColor: '#00ff00',
+            backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            data: []
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Time'
+                }
+            },
+            y: {
+                min: 0,
+                max: 25, // Set y-axis range from 0 to 25
+                title: {
+                    display: true,
+                    text: 'POWER (kW)' // Label the y-axis as "POWER"
+                }
+            }
+        }
+    }
+});
 // Add new charts for frequency, power factor, and energy
 const frequencyChart = new Chart(document.getElementById("frequencyChart"), {
     type: 'line',
@@ -148,10 +177,10 @@ const energyChart = new Chart(document.getElementById("energyChart"), {
             },
             y: {
                 min: 0,
-                max: 1000, // Energy range, can be adjusted based on expected values
+                max: 600, // Energy range, can be adjusted based on expected values
                 title: {
                     display: true,
-                    text: 'Energy (Wh)'
+                    text: 'Energy (kWh)'
                 }
             }
         }
