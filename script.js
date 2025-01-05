@@ -248,25 +248,6 @@ function updateCharts() {
     energyChart.update();
 }
 
-// Schedule LED control
-function scheduleLed() {
-    const scheduleTime = document.getElementById("scheduleTime").value;
-    if (scheduleTime) {
-        const now = new Date();
-        const [hours, minutes] = scheduleTime.split(":").map(Number);
-        const scheduledTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0);
-
-        const delay = scheduledTime.getTime() - now.getTime();
-
-        if (delay > 0) {
-            setTimeout(() => toggleLed(true), delay);
-            alert(`LED scheduled to turn on at ${scheduleTime}`);
-        } else {
-            alert("Please select a future time.");
-        }
-    }
-}
-
 // LED toggle function
 async function toggleLed(state) {
     const status = state ? 1 : 0;
