@@ -87,21 +87,3 @@ canvas {
     background-color: white; /* White background for OFF */
     color: black; /* Black text for OFF */
 }
-
-.scheduler {
-    text-align: center;
-    color: #00ff7f;
-}
-
-.scheduler button {
-    padding: 10px 20px;
-    background-color: #00ff7f;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.scheduler button:hover {
-    background-color: #32cd32;
-}
