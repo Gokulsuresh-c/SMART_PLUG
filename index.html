@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Plug Dashboard</title>
+    <title>Smart Plug</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -17,22 +18,14 @@
                 <span id="led-status">OFF</span>
             </label>
         </div>
-
-        <div class="schedule">
-            <h2>Schedule LED</h2>
-            <label for="time">Set Time:</label>
-            <input type="time" id="schedule-time">
-            <button id="schedule-btn">Set Schedule</button>
-        </div>
-
         <div id="charts">
             <h2>Voltage, Current, Power, Frequency, Power Factor, Energy</h2>
-            <div id="voltage-chart" class="chart"></div>
-            <div id="current-chart" class="chart"></div>
-            <div id="power-chart" class="chart"></div>
-            <div id="frequency-chart" class="chart"></div>
-            <div id="power-factor-chart" class="chart"></div>
-            <div id="energy-chart" class="chart"></div>
+            <canvas id="voltage-chart" class="chart"></canvas>
+            <canvas id="current-chart" class="chart"></canvas>
+            <canvas id="power-chart" class="chart"></canvas>
+            <canvas id="frequency-chart" class="chart"></canvas>
+            <canvas id="power-factor-chart" class="chart"></canvas>
+            <canvas id="energy-chart" class="chart"></canvas>
         </div>
     </div>
     <script src="script.js"></script>
