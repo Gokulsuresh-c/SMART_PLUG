@@ -252,7 +252,7 @@ function updateCharts() {
 async function toggleLed(state) {
     const status = state ? 1 : 0;
     document.getElementById("switchLabel").textContent = state ? "ON" : "OFF"; // Update label text
-    await fetch(`https://api.thingspeak.com/update?api_key=${writeKey}&field3=${status}`);
+    await fetch(`https://api.thingspeak.com/update?api_key=${writeKey}&field7=${status}`);
 }
 
 // Initialize switch and data fetch intervals
