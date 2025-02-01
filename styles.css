@@ -48,7 +48,7 @@ header h1 {
 
 canvas {
     width: 100% !important;
-    height: 220px !important; /* Reduced height for better fit */
+    height: 300px !important; /* Reduced height for better fit */
 }
 
 /* 🎛️ Control Section */
