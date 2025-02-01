@@ -1,7 +1,8 @@
 /* 🌞 Light & Modern Theme */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    background: url('C:\Users\gokul\OneDrive\Desktop\SEM 7\FINAL YR PRJCT\IMAGE_BG.jpg') no-repeat center center fixed; /* Background image from 'images' folder */
+    background-size: cover; /* Ensure the image covers the entire page */
     color: #333;
     margin: 0;
     padding: 0;
@@ -48,7 +49,7 @@ header h1 {
 
 canvas {
     width: 100% !important;
-    height: 350px !important; /* Reduced height for better fit */
+    height: 350px !important; /* Increased height for better fit */
 }
 
 /* 🎛️ Control Section */
