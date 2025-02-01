@@ -1,3 +1,23 @@
+/* 🌟 Background Image */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/path/to/IMAGE_BG.jpg') no-repeat center center fixed; /* Replace with the correct image path */
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    color: #333; /* Text color for contrast */
+}
+
+/* 🚀 Main Container Styling */
+.container {
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white for readability */
+    border-radius: 12px;
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* 🌞 Light & Modern Theme */
 body {
     font-family: 'Poppins', sans-serif;
