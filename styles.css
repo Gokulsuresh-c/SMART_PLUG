@@ -1,7 +1,7 @@
 /* 🌞 Light & Modern Theme */
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('C:\Users\gokul\OneDrive\Desktop\SEM 7\FINAL YR PRJCT\IMAGE_BG.jpg') no-repeat center center fixed; /* Background image from 'images' folder */
+    background: url('https://stock.adobe.com/search?k=%22energy+source%22') no-repeat center center fixed; /* External background image */
     background-size: cover; /* Ensure the image covers the entire page */
     color: #333;
     margin: 0;
@@ -49,7 +49,7 @@ header h1 {
 
 canvas {
     width: 100% !important;
-    height: 350px !important; /* Increased height for better fit */
+    height: 300px !important; /* Increased height for better fit */
 }
 
 /* 🎛️ Control Section */
