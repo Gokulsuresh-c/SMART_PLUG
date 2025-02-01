@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Plug</title>
+    <title>Smart Plug Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>SMART PLUG</h1>
-            <p>Real-time monitoring of Voltage, Current, Power, Frequency, Power Factor, and Energy</p>
+            <h1>⚡ Smart Plug Dashboard</h1>
+            <p>Live Monitoring of Voltage, Current, Power & More</p>
         </header>
         
         <section class="charts-section">
-            <canvas id="voltageChart"></canvas>
-            <canvas id="currentChart"></canvas>
-            <canvas id="powerChart"></canvas>
-            <canvas id="frequencyChart"></canvas>
-            <canvas id="powerFactorChart"></canvas>
-            <canvas id="energyChart"></canvas>
+            <div class="chart-box"><canvas id="voltageChart"></canvas></div>
+            <div class="chart-box"><canvas id="currentChart"></canvas></div>
+            <div class="chart-box"><canvas id="powerChart"></canvas></div>
+            <div class="chart-box"><canvas id="frequencyChart"></canvas></div>
+            <div class="chart-box"><canvas id="powerFactorChart"></canvas></div>
+            <div class="chart-box"><canvas id="energyChart"></canvas></div>
         </section>
 
         <section class="control-section">
             <div class="led-control">
                 <label for="ledSwitch">LED Control</label>
-                <input type="checkbox" id="ledSwitch" class="switch">
-                <span id="switchLabel" class="switch-label">OFF</span>
+                <label class="switch">
+                    <input type="checkbox" id="ledSwitch">
+                    <span class="slider"></span>
+                </label>
+                <span id="switchLabel">OFF</span>
             </div>
         </section>
     </div>
