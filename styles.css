@@ -1,7 +1,7 @@
 /* 🌞 Light & Modern Theme */
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('https://stock.adobe.com/search?k=%22energy+source%22') no-repeat center center fixed; /* External background image */
+    background: url('https://wallpapercave.com/wp/wp6562368.jpg') no-repeat center center fixed; /* Updated background image */
     background-size: cover; /* Ensure the image covers the entire page */
     color: #333;
     margin: 0;
@@ -118,4 +118,4 @@ input:checked + .slider:before {
     font-weight: bold;
     margin-left: 10px;
     font-size: 1em;
-}
+} 
