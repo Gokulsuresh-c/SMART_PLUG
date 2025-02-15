@@ -1,14 +1,13 @@
-/* 🌞 Light & Modern Theme */
+/* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('https://c1.wallpaperflare.com/preview/621/41/251/wind-turbines-sky-clouds-energy.jpg') no-repeat center center fixed; /* Updated background image */
-    background-size: cover; /* Ensure the image covers the entire page */
+    background: url('https://c1.wallpaperflare.com/preview/621/41/251/wind-turbines-sky-clouds-energy.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #333;
     margin: 0;
     padding: 0;
 }
 
-/* 🚀 Main Container */
 .container {
     max-width: 90%;
     margin: 20px auto;
@@ -18,7 +17,6 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔥 Header */
 header {
     text-align: center;
     padding: 15px 0;
@@ -30,10 +28,56 @@ header h1 {
     text-shadow: 0px 0px 5px rgba(0, 123, 255, 0.3);
 }
 
-/* 📊 Charts Section */
+/* Starting Page Styles */
+#starting-page {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+#starting-page button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#starting-page button:hover {
+    background-color: #0056b3;
+}
+
+/* Relay Operation Page Styles */
+#relay-operation-page {
+    text-align: center;
+}
+
+#relay-status {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#relay-status span {
+    font-weight: bold;
+}
+
+#solar-wind-graph {
+    margin-top: 20px;
+}
+
+/* Load Monitoring Page Styles */
 .charts-section {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 Charts per row */
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-top: 20px;
     padding: 10px;
@@ -49,73 +93,27 @@ header h1 {
 
 canvas {
     width: 100% !important;
-    height: 350px !important; /* Increased height for better fit */
+    height: 350px !important;
 }
 
-/* 🎛️ Control Section */
-.control-section {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+/* Hidden Class */
+.hidden {
+    display: none;
 }
 
-.led-control {
-    display: flex;
-    align-items: center;
-    background: rgba(0, 123, 255, 0.1);
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.2);
-}
-
-/* 📟 Modern Switch */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 25px;
-    margin-left: 10px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    background: #ccc;
-    border-radius: 30px;
-    transition: 0.4s;
-    width: 100%;
-    height: 100%;
-}
-
-.slider:before {
-    content: "";
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 2px;
-    background: white;
-    border-radius: 50%;
-    transition: 0.4s;
-}
-
-/* ✅ ON State */
-input:checked + .slider {
-    background: #007bff;
-}
-
-input:checked + .slider:before {
-    transform: translateX(24px);
-}
-
-#switchLabel {
-    font-weight: bold;
-    margin-left: 10px;
+/* Back Button Styles */
+#back-to-home {
+    margin-top: 20px;
+    padding: 10px 20px;
     font-size: 1em;
-} 
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#back-to-home:hover {
+    background-color: #0056b3;
+}
