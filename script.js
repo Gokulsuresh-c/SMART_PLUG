@@ -78,7 +78,81 @@ const currentChart = new Chart(document.getElementById("currentChart"), {
     }
 });
 
-// Add other charts (power, frequency, power factor, energy) similarly...
+const powerChart = new Chart(document.getElementById("powerChart"), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Power',
+            borderColor: '#ffff00',
+            backgroundColor: 'rgba(255, 255, 0, 0.2)',
+            data: []
+        }]
+    },
+    options: {
+        scales: {
+            x: { title: { display: true, text: 'Time' } },
+            y: { min: 0, max: 100, title: { display: true, text: 'Power (W)' } }
+        }
+    }
+});
+
+const frequencyChart = new Chart(document.getElementById("frequencyChart"), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Frequency',
+            borderColor: '#ff4500',
+            backgroundColor: 'rgba(255, 69, 0, 0.2)',
+            data: []
+        }]
+    },
+    options: {
+        scales: {
+            x: { title: { display: true, text: 'Time' } },
+            y: { min: 45, max: 65, title: { display: true, text: 'Frequency (Hz)' } }
+        }
+    }
+});
+
+const powerFactorChart = new Chart(document.getElementById("powerFactorChart"), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Power Factor',
+            borderColor: '#1e90ff',
+            backgroundColor: 'rgba(30, 144, 255, 0.2)',
+            data: []
+        }]
+    },
+    options: {
+        scales: {
+            x: { title: { display: true, text: 'Time' } },
+            y: { min: 0, max: 1, title: { display: true, text: 'Power Factor' } }
+        }
+    }
+});
+
+const energyChart = new Chart(document.getElementById("energyChart"), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Energy',
+            borderColor: '#32cd32',
+            backgroundColor: 'rgba(50, 205, 50, 0.2)',
+            data: []
+        }]
+    },
+    options: {
+        scales: {
+            x: { title: { display: true, text: 'Time' } },
+            y: { min: 0, max: 10, title: { display: true, text: 'Energy (kWh)' } }
+        }
+    }
+});
 
 // Fetch Data for Load Monitoring
 async function fetchData() {
@@ -87,15 +161,41 @@ async function fetchData() {
 
     const voltageData = data.feeds.map(feed => parseFloat(feed.field1));
     const currentData = data.feeds.map(feed => parseFloat(feed.field2));
+    const powerData = data.feeds.map(feed => parseFloat(feed.field1) * parseFloat(feed.field2));
+    const frequencyData = data.feeds.map(feed => parseFloat(feed.field4));
+    const powerFactorData = data.feeds.map(feed => parseFloat(feed.field5));
+    const energyData = data.feeds.map(feed => parseFloat(feed.field6));
     const timeLabels = data.feeds.map(feed => new Date(feed.created_at).toLocaleTimeString());
 
+    // Update Voltage Chart
     voltageChart.data.labels = timeLabels;
     voltageChart.data.datasets[0].data = voltageData;
     voltageChart.update();
 
+    // Update Current Chart
     currentChart.data.labels = timeLabels;
     currentChart.data.datasets[0].data = currentData;
     currentChart.update();
+
+    // Update Power Chart
+    powerChart.data.labels = timeLabels;
+    powerChart.data.datasets[0].data = powerData;
+    powerChart.update();
+
+    // Update Frequency Chart
+    frequencyChart.data.labels = timeLabels;
+    frequencyChart.data.datasets[0].data = frequencyData;
+    frequencyChart.update();
+
+    // Update Power Factor Chart
+    powerFactorChart.data.labels = timeLabels;
+    powerFactorChart.data.datasets[0].data = powerFactorData;
+    powerFactorChart.update();
+
+    // Update Energy Chart
+    energyChart.data.labels = timeLabels;
+    energyChart.data.datasets[0].data = energyData;
+    energyChart.update();
 }
 
 // Fetch data every 15 seconds
