@@ -3,34 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Plug Dashboard</title>
+    <title>Energy Monitoring System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>⚡ Smart Plug Dashboard</h1>
-            <p>Live Monitoring of Voltage, Current, Power & More</p>
-        </header>
-        
-        <section class="charts-section">
-            <div class="chart-box"><canvas id="voltageChart"></canvas></div>
-            <div class="chart-box"><canvas id="currentChart"></canvas></div>
-            <div class="chart-box"><canvas id="powerChart"></canvas></div>
-            <div class="chart-box"><canvas id="frequencyChart"></canvas></div>
-            <div class="chart-box"><canvas id="powerFactorChart"></canvas></div>
-            <div class="chart-box"><canvas id="energyChart"></canvas></div>
+        <!-- Starting Page -->
+        <section id="starting-page">
+            <header>
+                <h1>Energy Monitoring System</h1>
+            </header>
+            <div class="button-container">
+                <button id="relay-operation-btn">Relay Operation</button>
+                <button id="load-monitoring-btn">Load Monitoring</button>
+            </div>
         </section>
 
-        <section class="control-section">
-            <div class="led-control">
-                <label for="ledSwitch">LED Control</label>
-                <label class="switch">
-                    <input type="checkbox" id="ledSwitch">
-                    <span class="slider"></span>
-                </label>
-                <span id="switchLabel">OFF</span>
+        <!-- Relay Operation Page -->
+        <section id="relay-operation-page" class="hidden">
+            <header>
+                <h1>Relay Operation</h1>
+            </header>
+            <div id="relay-status">
+                <p>Relay 1: <span id="relay1-status">Loading...</span></p>
+                <p>Relay 2: <span id="relay2-status">Loading...</span></p>
+                <p>Relay 3: <span id="relay3-status">Loading...</span></p>
             </div>
+            <div id="solar-wind-graph">
+                <canvas id="solarWindChart"></canvas>
+            </div>
+            <button id="back-to-home">Back to Home</button>
+        </section>
+
+        <!-- Load Monitoring Page -->
+        <section id="load-monitoring-page" class="hidden">
+            <header>
+                <h1>Load Monitoring</h1>
+            </header>
+            <div class="charts-section">
+                <div class="chart-box"><canvas id="voltageChart"></canvas></div>
+                <div class="chart-box"><canvas id="currentChart"></canvas></div>
+                <div class="chart-box"><canvas id="powerChart"></canvas></div>
+                <div class="chart-box"><canvas id="frequencyChart"></canvas></div>
+                <div class="chart-box"><canvas id="powerFactorChart"></canvas></div>
+                <div class="chart-box"><canvas id="energyChart"></canvas></div>
+            </div>
+            <button id="back-to-home">Back to Home</button>
         </section>
     </div>
 
