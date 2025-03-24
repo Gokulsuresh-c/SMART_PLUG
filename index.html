@@ -25,9 +25,24 @@
                 <h1>Relay Operation</h1>
             </header>
             <div id="relay-status">
-                <p>Relay 1: <span id="relay1-status">Loading...</span></p>
-                <p>Relay 2: <span id="relay2-status">Loading...</span></p>
-                <p>Relay 3: <span id="relay3-status">Loading...</span></p>
+                <div class="relay-box" id="relay1-box">
+                    <p>SOLAR to LOAD: <span id="relay1-status">Loading...</span></p>
+                </div>
+                <div class="relay-box" id="relay2-box">
+                    <p>SOLAR to BATTERY: <span id="relay2-status">Loading...</span></p>
+                </div>
+                <div class="relay-box" id="relay3-box">
+                    <p>SOLAR to DISSIPATING RESISTOR: <span id="relay3-status">Loading...</span></p>
+                </div>
+                <div class="relay-box" id="relay4-box">
+                    <p>BATTERY to LOAD: <span id="relay4-status">Loading...</span></p>
+                </div>
+                <div class="relay-box" id="relay5-box">
+                    <p>WIND to LOAD: <span id="relay5-status">Loading...</span></p>
+                </div>
+                <div class="relay-box" id="relay6-box">
+                    <p>WIND to DISSIPATING RESISTOR: <span id="relay6-status">Loading...</span></p>
+                </div>
             </div>
             <div id="solar-wind-graph">
                 <canvas id="solarWindChart"></canvas>
