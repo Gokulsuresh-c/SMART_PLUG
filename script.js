@@ -1,6 +1,6 @@
 // ThingSpeak Configuration
-const apiKey = 'Z9I8A8CEOFKGXNNN'; // Replace with your ThingSpeak Read API Key
-const channelId = '2800872'; // Replace with your ThingSpeak Channel ID
+const apiKey = '2IYKGB5P3MGINZHX'; // Replace with your ThingSpeak Read API Key
+const channelId = '2884632'; // Replace with your ThingSpeak Channel ID
 
 // Navigation Logic
 document.getElementById('relay-operation-btn').addEventListener('click', () => {
@@ -29,14 +29,28 @@ async function fetchRelayStatus() {
     const data = await response.json();
     const relayStatus = data.feeds[0];
 
-    document.getElementById('relay1-status').textContent = relayStatus.field1 === '1' ? 'ON' : 'OFF';
-    document.getElementById('relay1-status').style.color = relayStatus.field1 === '1' ? 'green' : 'red';
+    const relays = [
+        { statusId: 'relay1-status', boxId: 'relay1-box', fieldValue: relayStatus.field1 },
+        { statusId: 'relay2-status', boxId: 'relay2-box', fieldValue: relayStatus.field2 },
+        { statusId: 'relay3-status', boxId: 'relay3-box', fieldValue: relayStatus.field3 },
+        { statusId: 'relay4-status', boxId: 'relay4-box', fieldValue: relayStatus.field4 },
+        { statusId: 'relay5-status', boxId: 'relay5-box', fieldValue: relayStatus.field5 },
+        { statusId: 'relay6-status', boxId: 'relay6-box', fieldValue: relayStatus.field6 }
+    ];
 
-    document.getElementById('relay2-status').textContent = relayStatus.field2 === '1' ? 'ON' : 'OFF';
-    document.getElementById('relay2-status').style.color = relayStatus.field2 === '1' ? 'green' : 'red';
+    relays.forEach(relay => {
+        const statusText = relay.fieldValue === '1' ? 'ON' : 'OFF';
+        document.getElementById(relay.statusId).textContent = statusText;
 
-    document.getElementById('relay3-status').textContent = relayStatus.field3 === '1' ? 'ON' : 'OFF';
-    document.getElementById('relay3-status').style.color = relayStatus.field3 === '1' ? 'green' : 'red';
+        const box = document.getElementById(relay.boxId);
+        if (statusText === 'ON') {
+            box.classList.add('active');
+            box.classList.remove('inactive');
+        } else {
+            box.classList.add('inactive');
+            box.classList.remove('active');
+        }
+    });
 }
 
 // Initialize Charts for Load Monitoring
@@ -201,3 +215,7 @@ async function fetchData() {
 // Fetch data every 15 seconds
 setInterval(fetchData, 15000);
 fetchData();
+
+// Fetch relay status every 15 seconds
+setInterval(fetchRelayStatus, 15000);
+fetchRelayStatus();
